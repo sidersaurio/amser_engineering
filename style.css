@@ -241,6 +241,10 @@ header {
 .about-content {
     max-width: 800px;
     margin: 0 auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .about p {
