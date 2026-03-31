@@ -1,0 +1,36 @@
+---
+interface SocialLink {
+  label: string;
+  href: string;
+}
+
+const socialLinks: SocialLink[] = [
+  { label: 'LinkedIn', href: '#' },
+  { label: 'Twitter', href: '#' },
+  { label: 'Instagram', href: '#' },
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="py-12 px-[5%] bg-footer-bg border-t border-border">
+  <div class="max-w-6xl mx-auto flex flex-col items-center gap-6">
+    <div class="text-xl font-bold text-foreground">AMSER Engineering</div>
+    <nav class="flex gap-8" aria-label="Social links">
+      {
+        socialLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-muted no-underline transition-all duration-300 hover:text-primary"
+            aria-label={link.label}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+    <p class="text-muted text-sm">
+      &copy; {currentYear} AMSER Engineering. Todos los derechos reservados.
+    </p>
+  </div>
+</footer>
