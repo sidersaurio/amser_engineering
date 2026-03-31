@@ -1,0 +1,121 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = "Contáctanos" } = Astro.props;
+---
+
+<section id="contact" class="py-24 px-[5%] bg-background">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex justify-center mb-16">
+      <h2 class="section-title">{title}</h2>
+    </div>
+    <form
+      id="contact-form"
+      class="contact-form max-w-xl mx-auto bg-card p-8 md:p-12 rounded-3xl border border-border"
+    >
+      <div class="mb-6">
+        <label for="name" class="block mb-2 text-primary text-sm">Nombre</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          placeholder="Tu nombre"
+          class="w-full p-4 bg-black/30 border border-border rounded-xl text-foreground font-sans transition-all duration-300 focus:outline-none focus:border-primary focus:bg-black/50"
+        />
+      </div>
+      <div class="mb-6">
+        <label for="email" class="block mb-2 text-primary text-sm">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          placeholder="tu@email.com"
+          class="w-full p-4 bg-black/30 border border-border rounded-xl text-foreground font-sans transition-all duration-300 focus:outline-none focus:border-primary focus:bg-black/50"
+        />
+      </div>
+      <div class="mb-6">
+        <label for="message" class="block mb-2 text-primary text-sm">Mensaje</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          required
+          placeholder="¿Cómo podemos ayudarte?"
+          class="w-full p-4 bg-black/30 border border-border rounded-xl text-foreground font-sans transition-all duration-300 focus:outline-none focus:border-primary focus:bg-black/50 resize-y"
+        ></textarea>
+      </div>
+      <button
+        type="submit"
+        class="btn-primary w-full border-none cursor-pointer text-base"
+      >
+        Enviar Mensaje
+      </button>
+    </form>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contact-form') as HTMLFormElement;
+    
+    // Intersection observer for animation
+    const observerOptions = {
+      threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.contact-form').forEach((el) => {
+      observer.observe(el);
+    });
+
+    // Form submission
+    contactForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const btn = contactForm.querySelector('button') as HTMLButtonElement;
+      const originalText = btn.innerText;
+
+      btn.innerText = 'Enviando...';
+      btn.disabled = true;
+
+      // Simulate API call
+      setTimeout(() => {
+        btn.innerText = '¡Mensaje Enviado!';
+        btn.style.background = 'linear-gradient(90deg, #00f2ff, #00f2ff)';
+
+        contactForm.reset();
+
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.disabled = false;
+          btn.style.background = '';
+        }, 3000);
+      }, 1500);
+    });
+  });
+</script>
+
+<style>
+  .contact-form {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+
+  .contact-form.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>

@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans bg-background text-foreground leading-relaxed overflow-x-hidden;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(90deg, #00f2ff, #0051ff);
+  }
+  
+  .btn-primary {
+    @apply inline-block px-10 py-4 bg-gradient-to-r from-secondary to-accent text-white no-underline rounded-full font-semibold transition-all duration-300;
+    box-shadow: 0 4px 15px rgba(0, 81, 255, 0.3);
+  }
+  
+  .btn-primary:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 6px 20px rgba(0, 81, 255, 0.5);
+  }
+  
+  .section-title {
+    @apply text-4xl mb-16 text-center relative inline-block;
+  }
+  
+  .section-title::after {
+    content: '';
+    @apply absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-16 h-1 bg-primary rounded;
+  }
+}
+
+@layer utilities {
+  .nav-link-underline::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+  }
+  
+  .nav-link-underline:hover::after {
+    @apply w-full;
+  }
+}

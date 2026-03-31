@@ -1,0 +1,67 @@
+---
+import ServiceCard from './ServiceCard.astro';
+
+interface Service {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+const services: Service[] = [
+  {
+    icon: '⚙️',
+    title: 'Diseño Mecánico',
+    description: 'Análisis y diseño de máquinas sostenibles para operaciones modernas.',
+  },
+  {
+    icon: '📊',
+    title: 'Análisis de Datos',
+    description: 'Desarrollo de soluciones basadas en datos para tomar decisiones informadas.',
+  },
+  {
+    icon: '💻',
+    title: 'Desarrollo de Software',
+    description: 'Aplicaciones web y móviles para optimizar tu negocio.',
+  },
+];
+---
+
+<section id="services" class="py-24 px-[5%] bg-background">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex justify-center mb-16">
+      <h2 class="section-title">Nuestros Servicios</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        services.map((service) => (
+          <ServiceCard
+            title={service.title}
+            description={service.description}
+            icon={service.icon}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+      threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.service-card').forEach((el) => {
+      observer.observe(el);
+    });
+  });
+</script>

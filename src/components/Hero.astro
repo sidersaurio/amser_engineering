@@ -1,0 +1,42 @@
+---
+interface Props {
+  title?: string;
+  highlightedWord?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaLink?: string;
+}
+
+const {
+  title = "Ingeniería del",
+  highlightedWord = "Futuro",
+  subtitle = "Diseñamos soluciones tecnológicas para los desafíos del mañana.",
+  ctaText = "Inicia tu Proyecto",
+  ctaLink = "#contact",
+} = Astro.props;
+---
+
+<section
+  id="home"
+  class="h-screen flex items-center justify-center text-center relative overflow-hidden"
+  style="background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0f 100%);"
+>
+  <!-- Animated background -->
+  <div
+    class="absolute w-[200%] h-[200%] animate-rotate pointer-events-none"
+    style="background: radial-gradient(circle, rgba(0, 242, 255, 0.1) 0%, transparent 50%);"
+  >
+  </div>
+
+  <div class="z-10 max-w-3xl px-5 animate-fade-in-up">
+    <h1 class="text-4xl md:text-6xl lg:text-7xl mb-6 leading-tight font-bold text-balance">
+      {title} <span class="gradient-text">{highlightedWord}</span>
+    </h1>
+    <p class="text-lg md:text-xl mb-10 text-muted text-pretty">
+      {subtitle}
+    </p>
+    <a href={ctaLink} class="btn-primary">
+      {ctaText}
+    </a>
+  </div>
+</section>
