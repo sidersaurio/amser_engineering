@@ -80,29 +80,18 @@ const { title = "Contáctanos" } = Astro.props;
       observer.observe(el);
     });
 
-    // Form submission
+    // Form submission via mailto
     contactForm?.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const btn = contactForm.querySelector('button') as HTMLButtonElement;
-      const originalText = btn.innerText;
+      const name = (document.getElementById('name') as HTMLInputElement).value;
+      const email = (document.getElementById('email') as HTMLInputElement).value;
+      const message = (document.getElementById('message') as HTMLTextAreaElement).value;
 
-      btn.innerText = 'Enviando...';
-      btn.disabled = true;
+      const subject = encodeURIComponent(`Contacto desde web - ${name}`);
+      const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}`);
 
-      // Simulate API call
-      setTimeout(() => {
-        btn.innerText = '¡Mensaje Enviado!';
-        btn.style.background = 'linear-gradient(90deg, #00f2ff, #00f2ff)';
-
-        contactForm.reset();
-
-        setTimeout(() => {
-          btn.innerText = originalText;
-          btn.disabled = false;
-          btn.style.background = '';
-        }, 3000);
-      }, 1500);
+      window.location.href = `mailto:a.molinasimancas@outlook.com?subject=${subject}&body=${body}`;
     });
   });
 </script>
