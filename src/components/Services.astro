@@ -1,5 +1,5 @@
 ---
-import ServiceCard from './ServiceCard.astro';
+import ServiceCard from "./ServiceCard.astro";
 
 interface Service {
   title: string;
@@ -9,19 +9,21 @@ interface Service {
 
 const services: Service[] = [
   {
-    icon: '⚙️',
-    title: 'Diseño Mecánico',
-    description: 'Análisis y diseño de máquinas sostenibles para operaciones modernas.',
+    icon: "⚙️",
+    title: "Diseño Mecánico",
+    description:
+      "Análisis y diseño de maquinaria sostenible para operaciones modernas.",
   },
   {
-    icon: '📊',
-    title: 'Análisis de Datos',
-    description: 'Desarrollo de soluciones basadas en datos para tomar decisiones informadas.',
+    icon: "🧪",
+    title: "Ciencia de Datos",
+    description:
+      "Desarrollo de soluciones basadas en datos para toma de decisiones informadas.",
   },
   {
-    icon: '💻',
-    title: 'Desarrollo de Software',
-    description: 'Aplicaciones web y móviles para optimizar tu negocio.',
+    icon: "💻",
+    title: "Desarrollo de Software",
+    description: "Aplicaciones web y móviles para optimizar tu negocio.",
   },
 ];
 ---
@@ -46,7 +48,7 @@ const services: Service[] = [
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     const observerOptions = {
       threshold: 0.1,
     };
@@ -54,13 +56,13 @@ const services: Service[] = [
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          entry.target.classList.add("visible");
           observer.unobserve(entry.target);
         }
       });
     }, observerOptions);
 
-    document.querySelectorAll('.service-card').forEach((el) => {
+    document.querySelectorAll(".service-card").forEach((el) => {
       observer.observe(el);
     });
   });
